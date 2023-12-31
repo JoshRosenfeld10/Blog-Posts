@@ -1,9 +1,9 @@
 import { PostData } from "../components/Form/Form";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const url = 'http://localhost:3000/posts'
 
-export const fetchPosts = async () => {
-    // Get Request
+export const getPosts = createAsyncThunk('posts/getPosts', async () => {
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -11,11 +11,9 @@ export const fetchPosts = async () => {
     } catch (error) {
         console.log((error as Error).message);
     }
-    
-}
+})
 
-export const createPost = async (createdPost: PostData) => {
-    // Post Request
+export const createPost = createAsyncThunk('posts/createPosts', async (createdPost: PostData) => {
     try {
         const config = {
             method: "POST",
@@ -39,4 +37,4 @@ export const createPost = async (createdPost: PostData) => {
     } catch (error) {
         console.log((error as Error).message);
     }
-}
+})

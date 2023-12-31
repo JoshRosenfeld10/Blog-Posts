@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/posts";
+import { createPost } from "../../api/actions";
 import { AppDispatch } from "../../reducers/store";
 
 export interface PostData {
@@ -64,7 +64,7 @@ function Form() {
           type="text"
           value={postData.message}
           placeholder="Message"
-          className="w-11/12 p-2 border-gray-300 border border-1 rounded-md text-sm"
+          className="w-11/12 p-2 text-wrap border-gray-300 border border-1 rounded-md text-sm"
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }

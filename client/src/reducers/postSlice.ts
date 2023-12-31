@@ -1,22 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 import PostModel from "../models/postModel";
+import { getPosts, createPost } from "../api/actions";
 
 const postsSlice = createSlice({
     name: "posts",
     initialState: [] as PostModel[],
-    reducers: {
-        get: (state, action) => {
+    reducers: {},
+    extraReducers: builder => {
+        builder.addCase(getPosts.fulfilled, (state, action) => {
             return action.payload;
-        },
-        create: (state, action) => {
-            return [...state, action.payload];
-        }
+        })
+        builder.addCase(createPost.fulfilled, (state, action) => {
+            return [...state, action.payload]
+        })
     }
 })
 
 export interface reducerState {
-    posts: typeof postsSlice
+    posts: PostModel[]
 }
 
-export const { get, create } = postsSlice.actions
 export default postsSlice.reducer

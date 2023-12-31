@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postSlice from "./postSlice";
+import postReducer from "./postSlice";
 
-export const store = configureStore({ reducer: {
-    posts: postSlice
-} });
+export const store = configureStore({ 
+    reducer: {
+        posts: postReducer
+    } 
+});
 
 export type AppDispatch = typeof store.dispatch;

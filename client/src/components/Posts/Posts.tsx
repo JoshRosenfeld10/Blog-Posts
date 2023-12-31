@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
-import { reducerState } from "../../reducers";
-import Post from "./Post";
-import PostModel from "../../models/postModel";
+import { reducerState } from "../../reducers/postSlice";
 
 function Posts() {
   const posts = useSelector((state: reducerState) => state.posts);
@@ -9,7 +7,11 @@ function Posts() {
 
   return (
     <div>
-      <div id="grid"></div>
+      <div id="grid">
+        {posts.map((post) => (
+          <div key={post._id?.toString()}>{post.title}</div>
+        ))}
+      </div>
     </div>
   );
 }
