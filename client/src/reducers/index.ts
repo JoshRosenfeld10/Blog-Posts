@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import postsReducer from './posts'
+import posts from "./postSlice";
 
 export interface reducerState {
-    posts: typeof postsReducer
+    posts: typeof posts
 }
 
 /* Combine Reducer turns an object whose values are different "slice reducer" 
@@ -13,5 +13,5 @@ dispatched, and gathers their results into a single state object. This enables
 splitting up reducer logic into separate functions, each managing their own 
 slice of the state independently. */
 export default combineReducers({
-    posts: postsReducer,
+    posts,
 })

@@ -28,7 +28,15 @@ function Form() {
     dispatch(createPost(postData));
   };
 
-  const handleClear = () => {};
+  const handleClear = () => {
+    setPostData({
+      author: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
 
   return (
     <div className=" w-fit shadow-md rounded-lg p-5">

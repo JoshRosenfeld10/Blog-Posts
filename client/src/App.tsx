@@ -6,7 +6,7 @@ import { AppDispatch } from "./reducers/store";
 import Form from "./components/Form/Form";
 
 function App() {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch(); // Calls store.dispatch()
 
   useEffect(() => {
     dispatch(getPosts());

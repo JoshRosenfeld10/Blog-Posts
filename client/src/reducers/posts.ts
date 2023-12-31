@@ -1,10 +1,11 @@
+import PostModel from "../models/postModel";
 
 export interface Action {
     type: string,
     payload: any
 }
 
-const reducer = (posts = [], action: Action) => {
+const reducer = (posts: PostModel[] = [], action: Action): PostModel[] => {
     switch (action.type) {
         case 'FETCH_ALL':
             return action.payload;
