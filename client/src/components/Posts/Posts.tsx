@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { reducerState } from "../../reducers/postSlice";
+import Post from "./Post";
 
 function Posts() {
   const posts = useSelector((state: reducerState) => state.posts);
@@ -9,7 +10,7 @@ function Posts() {
     <div>
       <div id="grid">
         {posts.map((post) => (
-          <div key={post._id?.toString()}>{post.title}</div>
+          <Post />
         ))}
       </div>
     </div>
