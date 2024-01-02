@@ -6,7 +6,7 @@ import {
   Delete,
   MoreHoriz,
 } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deletePost, updatePost } from "../../api/actions";
 import { ObjectId } from "mongodb";

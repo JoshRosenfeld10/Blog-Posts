@@ -16,7 +16,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="flex justify-center gap-28 my-10 ">
+      <div className="flex justify-center sm:gap-28 gap-8 my-10 sm:flex-row sm:items-start flex-col-reverse items-center">
         <Posts />
         <Form />
       </div>
