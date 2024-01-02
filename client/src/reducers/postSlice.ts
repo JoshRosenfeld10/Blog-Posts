@@ -1,6 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
 import PostModel from "../models/postModel";
-import { getPosts, createPost } from "../api/actions";
+import { getPosts, createPost, deletePost } from "../api/actions";
 
 const postsSlice = createSlice({
     name: "posts",
@@ -11,7 +11,10 @@ const postsSlice = createSlice({
             return action.payload;
         })
         builder.addCase(createPost.fulfilled, (state, action) => {
-            return [...state, action.payload]
+            return [...state, action.payload];
+        })
+        builder.addCase(deletePost.fulfilled, (state, action) => {
+            return state.filter((post) => post._id !== action.payload);
         })
     }
 })

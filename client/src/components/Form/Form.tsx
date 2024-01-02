@@ -12,6 +12,10 @@ export interface PostData {
   selectedFile: string;
 }
 
+interface Base64 {
+  base64: string;
+}
+
 function Form() {
   const [postData, setPostData] = useState({
     author: "",
@@ -26,6 +30,7 @@ function Form() {
     e.preventDefault();
 
     dispatch(createPost(postData));
+    handleClear();
   };
 
   const handleClear = () => {
@@ -39,7 +44,7 @@ function Form() {
   };
 
   return (
-    <div className=" w-fit shadow-md rounded-lg p-5 bg-light outline outline-green_secondary">
+    <div className=" w-fit h-fit shadow-lg rounded-lg p-5 bg-light outline outline-green_secondary z-10">
       <form
         className="flex flex-col justify-center items-center gap-2"
         autoComplete="off"
@@ -82,8 +87,8 @@ function Form() {
           <FileBase
             type="file"
             multiple={false}
-            onDone={(base64: string) =>
-              setPostData({ ...postData, selectedFile: base64 })
+            onDone={(base64: Base64) =>
+              setPostData({ ...postData, selectedFile: base64.base64 })
             }
           />
         </div>
@@ -94,7 +99,8 @@ function Form() {
           POST
         </button>
         <button
-          className=" bg-red-600 hover:bg-red-700 text-white w-full rounded-md p-2 text-xs transition-all ease-linear duration-100"
+          className=" bg-brown_primary hover:bg-[#98795c] text-white w-full rounded-md p-2 text-xs transition-all ease-linear duration-100"
+          type="button"
           onClick={handleClear}
         >
           CLEAR

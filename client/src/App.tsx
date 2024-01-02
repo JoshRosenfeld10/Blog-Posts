@@ -16,8 +16,10 @@ function App() {
   return (
     <div>
       <Header />
-      <Posts />
-      <Form />
+      <div className="flex justify-center gap-28 my-10 ">
+        <Posts />
+        <Form />
+      </div>
     </div>
   );
 }

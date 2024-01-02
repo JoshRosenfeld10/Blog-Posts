@@ -8,10 +8,15 @@ function Posts() {
 
   return (
     <div>
-      <div id="grid">
-        {posts.map((post) => (
-          <Post />
-        ))}
+      <div
+        id="grid"
+        className="grid gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
+      >
+        {!posts.length ? (
+          <h1>Loading...</h1>
+        ) : (
+          posts.map((post) => <Post post={post} key={post._id?.toString()} />)
+        )}
       </div>
     </div>
   );
