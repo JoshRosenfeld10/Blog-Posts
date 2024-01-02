@@ -6,9 +6,9 @@ import {
   Delete,
   MoreHoriz,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../api/actions";
+import { deletePost, updatePost } from "../../api/actions";
 import { ObjectId } from "mongodb";
 import { AppDispatch } from "../../reducers/store";
 
@@ -17,18 +17,33 @@ interface Props {
 }
 
 function Post({ post }: Props) {
-  const dispatch: AppDispatch = useDispatch();
   const { title, message, author, tags, selectedFile, likeCount, createdAt } =
     post;
 
+  const dispatch: AppDispatch = useDispatch();
   const [liked, setLiked] = useState(false);
+  const [stateLikeCount, setStateLikeCount] = useState(likeCount);
+
+  const formattedTags = tags.map((tag) => `#${tag} `);
 
   const handleLike = () => {
-    liked ? setLiked(false) : setLiked(true);
+    let likedPost: PostModel;
+
+    if (liked) {
+      likedPost = { ...post, likeCount: post.likeCount - 1 };
+      setStateLikeCount(stateLikeCount - 1);
+      setLiked(false);
+    } else {
+      likedPost = { ...post, likeCount: post.likeCount + 1 };
+      setStateLikeCount(stateLikeCount + 1);
+      setLiked(true);
+    }
+
+    dispatch(updatePost({ id: post._id as ObjectId, updatedPost: likedPost }));
   };
 
   return (
-    <div className="bg-light min-w-[16rem] max-w-[18rem] h-96 text-wrap rounded-2xl shadow-lg cursor-default flex flex-col hover:scale-105 hover:shadow-2xl transition-all ease-linear duration-200">
+    <div className="bg-light min-w-[16rem] max-w-[18rem] h-96 text-wrap rounded-2xl shadow-lg cursor-default flex flex-col hover:scale-105 hover:shadow-xl transition-all ease-linear">
       <div className="relative w-full h-[45%] text-light">
         {!(selectedFile === "") ? (
           <img
@@ -52,7 +67,7 @@ function Post({ post }: Props) {
         </h3>
       </div>
       <div className="w-full h-[55%] flex flex-col justify-between p-5">
-        <h3 className="text-xs text-green_secondary">{tags}</h3>
+        <h3 className="text-xs text-green_secondary">{formattedTags}</h3>
         <h1 className="font-bold text-2xl text-green_primary">{title}</h1>
         <p className="text-sm">{message}</p>
         <div className="flex justify-between items-center text-sm text-brown_primary">
@@ -65,7 +80,7 @@ function Post({ post }: Props) {
             ) : (
               <ThumbUpOffAlt fontSize="small" />
             )}
-            <span>{likeCount}</span>
+            <span>{stateLikeCount}</span>
             {liked ? "LIKED" : "LIKE"}
           </button>
           <button

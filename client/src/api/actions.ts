@@ -20,3 +20,8 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id: Object
     const response = await axios.delete(`${url}/${id}`);
     return response.data;
 })
+
+export const updatePost = createAsyncThunk('posts/updatePost', async (data: {id: ObjectId, updatedPost: PostData}) => {
+    const response = await axios.patch(`${url}/${data.id}`, data.updatedPost);
+    return response.data;
+})

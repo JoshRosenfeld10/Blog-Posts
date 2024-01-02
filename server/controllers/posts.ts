@@ -27,7 +27,7 @@ export const createPost = async (req: Request, res: Response) => {
     }
 }
 
-export const editPost = async (req: Request, res: Response) => {
+export const updatePost = async (req: Request, res: Response) => {
     // /posts/:id
     const { id } = req.params;
     const newPost = req.body;

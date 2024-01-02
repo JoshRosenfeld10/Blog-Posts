@@ -8,7 +8,7 @@ export interface PostData {
   author: string;
   title: string;
   message: string;
-  tags: string;
+  tags: string[];
   selectedFile: string;
 }
 
@@ -21,9 +21,9 @@ function Form() {
     author: "",
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: "",
-  });
+  } as PostData);
   const dispatch: AppDispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent) => {
@@ -38,7 +38,7 @@ function Form() {
       author: "",
       title: "",
       message: "",
-      tags: "",
+      tags: [],
       selectedFile: "",
     });
   };
@@ -79,9 +79,14 @@ function Form() {
         <input
           type="text"
           value={postData.tags}
-          placeholder="Tags"
+          placeholder="Tags (separate by comma)"
           className="w-11/12 p-2 border-green_secondary border border-1 rounded-md text-sm outline-green_primary "
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostData({
+              ...postData,
+              tags: e.target.value.replace(/\s/g, "").split(","), // Remove spaces, split by comma
+            })
+          }
         ></input>
         <div className=" text-xs flex justify-center w-11/12">
           <FileBase
