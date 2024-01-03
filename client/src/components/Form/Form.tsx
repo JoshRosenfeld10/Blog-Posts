@@ -53,41 +53,66 @@ function Form() {
         <h1 className="font-semibold text-lg cursor-default text-green_primary">
           Create a Post
         </h1>
-        <input
-          type="text"
-          value={postData.author}
-          placeholder="Author"
-          className="w-11/12 p-2 border-green_secondary border border-1 rounded-md text-sm outline-green_primary"
-          onChange={(e) => setPostData({ ...postData, author: e.target.value })}
-        ></input>
-        <input
-          type="text"
-          value={postData.title}
-          placeholder="Title"
-          className="w-11/12 p-2 border-green_secondary border border-1 rounded-md text-sm outline-green_primary"
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-        ></input>
-        <input
-          type="text"
-          value={postData.message}
-          placeholder="Message"
-          className="w-11/12 p-2 text-wrap border-green_secondary border border-1 rounded-md text-sm outline-green_primary"
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
-        ></input>
-        <input
-          type="text"
-          value={postData.tags}
-          placeholder="Tags (separate by comma)"
-          className="w-11/12 p-2 border-green_secondary border border-1 rounded-md text-sm outline-green_primary "
-          onChange={(e) =>
-            setPostData({
-              ...postData,
-              tags: e.target.value.replace(/\s/g, "").split(","), // Remove spaces, split by comma
-            })
-          }
-        ></input>
+
+        <div className="relative w-11/12 h-10">
+          <input
+            className="peer w-full h-full font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 placeholder-shown:border-t-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-200 focus:border-green_primary"
+            placeholder=" "
+            value={postData.author}
+            onChange={(e) =>
+              setPostData({ ...postData, author: e.target.value })
+            }
+          />
+          <label className="flex w-full h-full text-sm select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-gray-400 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-gray-400 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-400 peer-focus:text-green_primary before:border-gray-200 peer-focus:before:!border-green_primary after:border-gray-200 peer-focus:after:!border-green_primary">
+            Author
+          </label>
+        </div>
+
+        <div className="relative w-11/12 h-10">
+          <input
+            className="peer w-full h-full font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 placeholder-shown:border-t-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-200 focus:border-green_primary"
+            placeholder=" "
+            value={postData.title}
+            onChange={(e) =>
+              setPostData({ ...postData, title: e.target.value })
+            }
+          />
+          <label className="flex w-full h-full text-sm select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-gray-400 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-gray-400 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-400 peer-focus:text-green_primary before:border-gray-200 peer-focus:before:!border-green_primary after:border-gray-200 peer-focus:after:!border-green_primary">
+            Title
+          </label>
+        </div>
+
+        <div className="relative w-11/12 h-10">
+          <input
+            className="peer w-full h-full font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 placeholder-shown:border-t-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-200 focus:border-green_primary"
+            placeholder=" "
+            value={postData.message}
+            onChange={(e) =>
+              setPostData({ ...postData, message: e.target.value })
+            }
+          />
+          <label className="flex w-full h-full text-sm select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-gray-400 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-gray-400 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-400 peer-focus:text-green_primary before:border-gray-200 peer-focus:before:!border-green_primary after:border-gray-200 peer-focus:after:!border-green_primary">
+            Message
+          </label>
+        </div>
+
+        <div className="relative w-11/12 h-10">
+          <input
+            className="peer w-full h-full font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 placeholder-shown:border-t-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-200 focus:border-green_primary"
+            placeholder=" "
+            value={postData.tags}
+            onChange={(e) =>
+              setPostData({
+                ...postData,
+                tags: e.target.value.replace(/\s/g, "").split(","), // Remove spaces, split by comma
+              })
+            }
+          />
+          <label className="flex w-full h-full text-sm select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-gray-400 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-gray-400 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-400 peer-focus:text-green_primary before:border-gray-200 peer-focus:before:!border-green_primary after:border-gray-200 peer-focus:after:!border-green_primary">
+            Tags (separate by comma)
+          </label>
+        </div>
+
         <div className=" text-xs flex justify-center w-11/12">
           <FileBase
             type="file"

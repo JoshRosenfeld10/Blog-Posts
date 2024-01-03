@@ -43,7 +43,7 @@ function Post({ post }: Props) {
   };
 
   return (
-    <div className="bg-light min-w-[16rem] max-w-[18rem] h-96 text-wrap rounded-2xl shadow-lg cursor-default flex flex-col hover:scale-105 hover:shadow-xl transition-all ease-linear">
+    <div className="bg-light min-w-[16rem] max-w-[18rem] h-96 text-wrap rounded-2xl shadow-lg cursor-default flex flex-col hover:scale-105 hover:shadow-xl transition-all ease-linear overflow-hidden">
       <div className="relative w-full h-[45%] text-light">
         {!(selectedFile === "") ? (
           <img
@@ -67,7 +67,12 @@ function Post({ post }: Props) {
         </h3>
       </div>
       <div className="w-full h-[55%] flex flex-col justify-between p-5">
-        <h3 className="text-xs text-green_secondary">{formattedTags}</h3>
+        <div className="text-xs flex gap-1 text-light font-semibold">
+          {tags.map((tag) => (
+            <div className=" bg-gradient-to-tr from-green_primary to-green_secondary p-1 rounded-lg ">{`#${tag}`}</div>
+          ))}
+        </div>
+        {/* <h3 className="text-xs text-green_secondary">{formattedTags}</h3> */}
         <h1 className="font-bold text-2xl text-green_primary">{title}</h1>
         <p className="text-sm">{message}</p>
         <div className="flex justify-between items-center text-sm text-brown_primary">
