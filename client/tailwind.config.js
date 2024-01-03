@@ -7,11 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        light: '#F2F1EB',
-        cream: '#EEE7DA',
-        green_primary: '#5F6F52',
-        green_secondary: '#A9B388',
-        brown_primary: '#B99470'
+        light: '#F9F7F7',
+        cream: '#e2e7f1',
+        blue_primary: '#1a3f69',
+        blue_secondary: '#3F72AF',
+        blue_secondary_hover: '#325a8a',
+        dark_primary: '#454b55',
+        dark_primary_hover: '#2c2f36'
       },
     },
   },

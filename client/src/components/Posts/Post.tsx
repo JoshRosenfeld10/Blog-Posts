@@ -56,7 +56,7 @@ function Post({ post }: Props) {
             src={selectedFile}
           />
         ) : (
-          <div className=" bg-brown_primary h-full w-full rounded-t-2xl" />
+          <div className=" bg-dark_primary h-full w-full rounded-t-2xl" />
         )}
         <h1 className="absolute top-[20px] left-[20px] text-xl font-semibold">
           {author}
@@ -77,15 +77,15 @@ function Post({ post }: Props) {
           {tags.map((tag) => (
             <div
               key={tag}
-              className=" bg-gradient-to-tr from-green_primary to-green_secondary p-1 rounded-lg "
+              className=" bg-gradient-to-tr from-blue_primary to-blue_secondary p-1 rounded-lg "
             >{`#${tag}`}</div>
           ))}
         </div>
-        <h1 className="font-bold text-2xl text-green_primary">{title}</h1>
+        <h1 className="font-bold text-2xl text-blue_primary">{title}</h1>
         <p className="text-sm">{message}</p>
-        <div className="flex justify-between items-center text-sm text-brown_primary">
+        <div className="flex justify-between items-center text-sm text-dark_primary">
           <button
-            className="flex items-center gap-1 hover:text-[#98795c] transition-all ease-linear duration-[85ms]"
+            className="flex items-center gap-1 hover:text-dark_primary_hover transition-all ease-linear duration-[85ms]"
             onClick={handleLike}
           >
             {liked ? (
@@ -97,7 +97,7 @@ function Post({ post }: Props) {
             {liked ? "LIKED" : "LIKE"}
           </button>
           <button
-            className="flex items-center gap-[1px] hover:text-[#98795c] transition-all ease-linear duration-[85ms]"
+            className="flex items-center gap-[1px] hover:text-dark_primary_hover transition-all ease-linear duration-[85ms]"
             onClick={() => dispatch(deletePost(post._id as ObjectId))}
           >
             <Delete fontSize="small" />

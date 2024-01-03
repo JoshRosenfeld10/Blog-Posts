@@ -37,7 +37,7 @@ function Posts() {
   return (
     <div id="grid" className={gridClass}>
       {!posts.length ? (
-        <h1 className="text-xl text-green_primary">{message}</h1>
+        <h1 className="text-xl text-blue_primary">{message}</h1>
       ) : (
         posts.map((post) => <Post post={post} key={post._id?.toString()} />)
       )}
