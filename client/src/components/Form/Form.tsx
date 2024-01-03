@@ -45,7 +45,7 @@ function Form() {
   };
 
   return (
-    <div className=" w-fit h-fit shadow-lg rounded-lg p-5 bg-light outline outline-dark_primary z-10">
+    <div className=" w-fit h-96 shadow-lg rounded-lg p-5 bg-light outline outline-dark_primary z-10">
       <form
         className="flex flex-col justify-center items-center gap-2"
         autoComplete="off"
