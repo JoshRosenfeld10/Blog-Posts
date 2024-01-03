@@ -3,8 +3,10 @@ import cors from 'cors'
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose'
 import postRoutes from './routes/posts.ts'
+import dotenv from 'dotenv'
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb"}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}))
@@ -15,9 +17,8 @@ app.use(express.json())
 app.use('/posts', postRoutes)
 
 // Connect to database
-const CONNECTION_URL = 'mongodb+srv://joshrosenfeld:joshrosenfeld123@cluster0.dhb97zt.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(process.env.CONNECTION_URL as string)
     .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
     .catch((error) => console.log(error.message));
