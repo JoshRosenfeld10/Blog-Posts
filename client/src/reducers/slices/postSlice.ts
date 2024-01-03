@@ -1,6 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
-import PostModel from "../models/postModel";
-import { getPosts, createPost, deletePost, updatePost } from "../api/actions";
+import PostModel from "../../models/postModel";
+import { getPosts, createPost, deletePost, updatePost } from "../../api/actions";
 
 const postsSlice = createSlice({
     name: "posts",
@@ -28,7 +28,7 @@ const postsSlice = createSlice({
     }
 })
 
-export interface reducerState {
+export interface postReducerState {
     posts: PostModel[]
 }
 

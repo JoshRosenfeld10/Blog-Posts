@@ -1,37 +1,27 @@
 import { useState, FormEvent } from "react";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../api/actions";
-import { AppDispatch } from "../../reducers/store";
-import PostAddIcon from "@mui/icons-material/PostAdd";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../reducers/store";
+import ClearIcon from "@mui/icons-material/Clear";
+import { toggleEdit } from "../../reducers/slices/editSlice";
+import { PostData, Base64 } from "./Form";
+import PostModel from "../../models/postModel";
+import EditIcon from "@mui/icons-material/Edit";
 
-export interface PostData {
-  author: string;
-  title: string;
-  message: string;
-  tags: string[];
-  selectedFile: string;
-}
-
-export interface Base64 {
-  base64: string;
-}
-
-function Form() {
+function EditForm() {
+  const selectedPost = useSelector((state: RootState) => state.editPost);
   const [postData, setPostData] = useState({
-    author: "",
-    title: "",
-    message: "",
-    tags: [],
-    selectedFile: "",
+    author: (selectedPost.selectedPost as PostModel).author,
+    title: (selectedPost.selectedPost as PostModel).title,
+    message: (selectedPost.selectedPost as PostModel).message,
+    tags: (selectedPost.selectedPost as PostModel).tags,
+    selectedFile: (selectedPost.selectedPost as PostModel).selectedFile,
   } as PostData);
+
   const dispatch: AppDispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    dispatch(createPost(postData));
-    handleClear();
   };
 
   const handleClear = () => {
@@ -45,14 +35,20 @@ function Form() {
   };
 
   return (
-    <div className=" w-fit h-fit shadow-lg rounded-lg p-5 bg-light outline outline-green_secondary z-10">
+    <div className="fixed top-[50%] left-[50%] -mt-[187px] -ml-[148.5px] w-fit h-fit shadow-2xl rounded-lg p-5 bg-light outline outline-green_secondary z-20">
+      <button
+        className="absolute top-[15px] right-[15px]"
+        onClick={() => dispatch(toggleEdit())}
+      >
+        <ClearIcon />
+      </button>
       <form
         className="flex flex-col justify-center items-center gap-2"
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <div className="flex justify-center items-center gap-1 font-semibold text-xl cursor-default text-green_primary">
-          Create a Post <PostAddIcon />
+        <div className="flex gap-1 justify-center items-center font-semibold text-xl cursor-default text-green_primary">
+          Edit Post <EditIcon fontSize="medium" />
         </div>
 
         <div className="relative w-11/12 h-10">
@@ -141,4 +137,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default EditForm;

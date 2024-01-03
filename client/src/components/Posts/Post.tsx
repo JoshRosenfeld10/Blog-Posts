@@ -7,10 +7,11 @@ import {
   MoreHoriz,
 } from "@mui/icons-material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost, updatePost } from "../../api/actions";
 import { ObjectId } from "mongodb";
-import { AppDispatch } from "../../reducers/store";
+import { AppDispatch, RootState } from "../../reducers/store";
+import { setEditingPost, toggleEdit } from "../../reducers/slices/editSlice";
 
 interface Props {
   post: PostModel;
@@ -21,10 +22,9 @@ function Post({ post }: Props) {
     post;
 
   const dispatch: AppDispatch = useDispatch();
+  const editing = useSelector((state: RootState) => state.editPost);
   const [liked, setLiked] = useState(false);
   const [stateLikeCount, setStateLikeCount] = useState(likeCount);
-
-  const formattedTags = tags.map((tag) => `#${tag} `);
 
   const handleLike = () => {
     let likedPost: PostModel;
@@ -40,6 +40,11 @@ function Post({ post }: Props) {
     }
 
     dispatch(updatePost({ id: post._id as ObjectId, updatedPost: likedPost }));
+  };
+
+  const handleEdit = () => {
+    editing && dispatch(setEditingPost(post));
+    dispatch(toggleEdit());
   };
 
   return (
@@ -59,6 +64,7 @@ function Post({ post }: Props) {
         <button
           id="edit-btn"
           className="font-bold absolute top-[20px] right-[20px] bg-black rounded-full bg-opacity-0 hover:bg-opacity-50 transition-all ease-linear duration-[85ms] active:text-gray-300"
+          onClick={handleEdit}
         >
           <MoreHoriz fontSize="medium" className="opacity-100" />
         </button>
@@ -69,10 +75,12 @@ function Post({ post }: Props) {
       <div className="w-full h-[55%] flex flex-col justify-between p-5">
         <div className="text-xs flex gap-1 text-light font-semibold">
           {tags.map((tag) => (
-            <div className=" bg-gradient-to-tr from-green_primary to-green_secondary p-1 rounded-lg ">{`#${tag}`}</div>
+            <div
+              key={tag}
+              className=" bg-gradient-to-tr from-green_primary to-green_secondary p-1 rounded-lg "
+            >{`#${tag}`}</div>
           ))}
         </div>
-        {/* <h3 className="text-xs text-green_secondary">{formattedTags}</h3> */}
         <h1 className="font-bold text-2xl text-green_primary">{title}</h1>
         <p className="text-sm">{message}</p>
         <div className="flex justify-between items-center text-sm text-brown_primary">

@@ -1,18 +1,16 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { reducerState } from "../../reducers/postSlice";
 import Post from "./Post";
+import { RootState } from "../../reducers/store";
 
 function Posts() {
-  const posts = useSelector((state: reducerState) => state.posts);
+  const posts = useSelector((state: RootState) => state.posts);
   console.log(posts);
 
   const [message, setMessage] = useState("Loading...");
   const [gridClass, setGridClass] = useState("");
 
   useEffect(() => {
-    console.log(message);
-
     const timer = setTimeout(() => setMessage("No Posts!"), 1000);
     return () => clearTimeout(timer);
   }, []);
