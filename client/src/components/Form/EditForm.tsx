@@ -7,21 +7,31 @@ import { toggleEdit } from "../../reducers/slices/editSlice";
 import { PostData, Base64 } from "./Form";
 import PostModel from "../../models/postModel";
 import EditIcon from "@mui/icons-material/Edit";
+import { deletePost, updatePost } from "../../api/actions";
+import { ObjectId } from "mongodb";
 
 function EditForm() {
-  const selectedPost = useSelector((state: RootState) => state.editPost);
+  const selectedPost = useSelector(
+    (state: RootState) => state.editPost.selectedPost as PostModel
+  );
   const [postData, setPostData] = useState({
-    author: (selectedPost.selectedPost as PostModel).author,
-    title: (selectedPost.selectedPost as PostModel).title,
-    message: (selectedPost.selectedPost as PostModel).message,
-    tags: (selectedPost.selectedPost as PostModel).tags,
-    selectedFile: (selectedPost.selectedPost as PostModel).selectedFile,
+    author: selectedPost.author,
+    title: selectedPost.title,
+    message: selectedPost.message,
+    tags: selectedPost.tags,
+    selectedFile: selectedPost.selectedFile,
   } as PostData);
 
   const dispatch: AppDispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    dispatch(
+      updatePost({ id: selectedPost._id as ObjectId, updatedPost: postData })
+    );
+
+    dispatch(toggleEdit());
   };
 
   const handleClear = () => {
@@ -34,10 +44,15 @@ function EditForm() {
     });
   };
 
+  const handleDelete = () => {
+    dispatch(deletePost(selectedPost._id as ObjectId));
+    dispatch(toggleEdit());
+  };
+
   return (
     <div className="fixed top-[50%] left-[50%] -mt-[187px] -ml-[148.5px] w-fit h-fit shadow-2xl rounded-lg p-5 bg-light outline outline-green_secondary z-20">
       <button
-        className="absolute top-[15px] right-[15px]"
+        className="absolute top-[15px] right-[15px] text-gray-500 hover:text-gray-700"
         onClick={() => dispatch(toggleEdit())}
       >
         <ClearIcon />
@@ -123,7 +138,7 @@ function EditForm() {
           className="bg-green_secondary hover:bg-[#7e8664] text-white w-full rounded-md p-2 text-sm transition-all ease-linear duration-100"
           type="submit"
         >
-          POST
+          UPDATE
         </button>
         <button
           className=" bg-brown_primary hover:bg-[#98795c] text-white w-full rounded-md p-2 text-xs transition-all ease-linear duration-100"
@@ -131,6 +146,14 @@ function EditForm() {
           onClick={handleClear}
         >
           CLEAR
+        </button>
+        <hr className="w-full h-[2px] bg-green_primary rounded-md"></hr>
+        <button
+          className=" bg-red-500 hover:bg-red-600 text-white w-full rounded-md p-2 text-xs transition-all ease-linear duration-100"
+          type="button"
+          onClick={handleDelete}
+        >
+          DELETE POST
         </button>
       </form>
     </div>
