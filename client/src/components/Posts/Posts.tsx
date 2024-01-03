@@ -18,16 +18,18 @@ function Posts() {
   useEffect(() => {
     switch (posts.length) {
       case 0:
-        setGridClass("flex");
+        setGridClass("flex mb-10");
         break;
       case 1:
-        setGridClass("grid gap-8 grid-cols-1");
+        setGridClass("grid gap-8 grid-cols-1 mb-10");
         break;
       case 2:
-        setGridClass("grid gap-8 grid-cols-1 lg:grid-cols-2");
+        setGridClass("grid gap-8 grid-cols-1 lg:grid-cols-2 mb-10");
         break;
       default:
-        setGridClass("grid gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3");
+        setGridClass(
+          "grid gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mb-10"
+        );
         break;
     }
   }, [posts.length]);

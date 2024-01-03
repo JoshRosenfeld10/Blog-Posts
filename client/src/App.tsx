@@ -23,7 +23,7 @@ function App() {
         id="blur-layer"
         className={
           editSlice.editing
-            ? "blur transition-all ease-linear brightness-75"
+            ? "blur transition-all ease-linear brightness-75 pointer-events-none"
             : "transition-all ease-linear"
         }
       >
