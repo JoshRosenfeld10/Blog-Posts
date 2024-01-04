@@ -3,7 +3,7 @@ import { PostData } from "../components/Form/Form";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ObjectId } from "mongodb";
 
-const url = 'http://localhost:3000/posts'
+const url = 'https://posts-project-api.onrender.com/posts'
 
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
     const response = await axios.get(url);
