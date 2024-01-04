@@ -7,7 +7,7 @@ const postsSlice = createSlice({
     initialState: [] as PostModel[],
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(getPosts.fulfilled, (state, action) => {
+        builder.addCase(getPosts.fulfilled, (_state, action) => {
             return action.payload;
         })
         builder.addCase(createPost.fulfilled, (state, action) => {
